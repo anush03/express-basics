@@ -1,3 +1,4 @@
+//sending baisc json data
 const express = require("express");
 const app = express();
 const { products, people } = require("./data");

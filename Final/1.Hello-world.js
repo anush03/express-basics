@@ -1,11 +1,11 @@
+//Simple hello world program
 const express = require("express");
 const app = express();
-const { products, people } = require("./data");
 
 app.get("/", (req, res) => {
-  res.json(people);
+  res.send("Hello World!!");
 });
 
 app.listen(5000, () => {
-  console.log("Server is listening on port 5000....");
+  console.log("Listening on Port 5000");
 });
