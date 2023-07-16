@@ -1,17 +1,14 @@
 const express = require("express");
 const app = express();
-const morgan = require("morgan");
 const logger = require("./logger");
 const authorize = require("./authorize");
 
-//middleware
-//app vs use
-//options-our own/exprees built-in / third party
-// app.use([logger, authorize]);   //our own
-//app.use(express.static('./public'))  //built-in
+//req => middleware => res
+app.use([logger, authorize]); //execute sequentially (first logger then authorize)
 
-//third party middleware
-app.use(morgan("tiny"));
+//app.use('/api',logger);
+//applied to both /api/items and /api/products
+// app.use(express.static('./public'))
 
 app.get("/", (req, res) => {
   res.send("Home");
@@ -24,6 +21,10 @@ app.get("/about", (req, res) => {
 app.get("/api/products", (req, res) => {
   res.send("Products");
 });
+
+// app.get("/api/products", [logger, authorize], (req, res) => {
+//   res.send("Products");
+// });
 
 app.get("/api/items", (req, res) => {
   res.send("Items");
